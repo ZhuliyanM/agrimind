@@ -9,7 +9,7 @@ export function Topbar() {
   const statusLabel = {
     authenticated: session?.user.email ?? 'Authenticated',
     anonymous: 'Anonymous',
-    'env-missing': 'Supabase not configured',
+    'env-missing': 'Demo mode active',
     loading: 'Checking session',
   }[status]
 
@@ -17,8 +17,8 @@ export function Topbar() {
     <header className="border-b border-white/10 bg-stone-950/60 px-6 py-5 backdrop-blur lg:px-10">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <p className="text-sm uppercase tracking-[0.3em] text-stone-500">Workspace</p>
-          <p className="mt-2 text-2xl font-semibold text-white">SaaS architecture control plane</p>
+          <p className="text-sm uppercase tracking-[0.3em] text-emerald-200/70">AgriMind Command</p>
+          <p className="mt-2 text-2xl font-semibold text-white">Field intelligence operating system</p>
           <p className="mt-1 text-sm text-stone-400">{statusLabel}</p>
         </div>
 
@@ -28,7 +28,7 @@ export function Topbar() {
             <input
               value={searchQuery}
               onChange={(event) => setSearchQuery(event.target.value)}
-              placeholder="Search future modules"
+              placeholder="Search modules, insights, or layers"
               className="w-full bg-transparent outline-none placeholder:text-stone-500"
             />
           </label>

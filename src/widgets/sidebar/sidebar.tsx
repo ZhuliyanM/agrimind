@@ -1,4 +1,4 @@
-import { ChartNoAxesCombined, DatabaseZap, LayoutDashboard, Sprout } from 'lucide-react'
+import { Activity, ChartNoAxesCombined, DatabaseZap, LayoutDashboard, Sprout, Waves } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 
 const navigationItems = [
@@ -8,14 +8,24 @@ const navigationItems = [
     icon: LayoutDashboard,
   },
   {
-    label: 'Modules',
+    label: 'Geo Intelligence',
     to: '/app',
     icon: Sprout,
   },
   {
-    label: 'Data layer',
+    label: 'Water Systems',
+    to: '/app',
+    icon: Waves,
+  },
+  {
+    label: 'Data Fabric',
     to: '/app',
     icon: DatabaseZap,
+  },
+  {
+    label: 'Operations',
+    to: '/app',
+    icon: Activity,
   },
   {
     label: 'Analytics',
@@ -33,11 +43,19 @@ export function Sidebar() {
         </div>
         <div>
           <p className="text-sm uppercase tracking-[0.28em] text-emerald-200/80">AgriMind</p>
-          <p className="text-xs text-stone-500">Application architecture shell</p>
+          <p className="text-xs text-stone-500">New-generation agri SaaS</p>
         </div>
       </div>
 
-      <nav className="mt-8 grid gap-2">
+      <div className="mt-8 rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-4">
+        <p className="text-xs uppercase tracking-[0.28em] text-stone-500">Demo territory</p>
+        <p className="mt-2 text-lg font-semibold text-white">Shumen, Bulgaria</p>
+        <p className="mt-2 text-sm leading-6 text-stone-400">
+          Sentinel-first command layer for crop monitoring, irrigation readiness, and modular farm operations.
+        </p>
+      </div>
+
+      <nav className="mt-6 grid gap-2">
         {navigationItems.map(({ label, to, icon: Icon }) => (
           <NavLink
             key={label}
@@ -56,6 +74,14 @@ export function Sidebar() {
           </NavLink>
         ))}
       </nav>
+
+      <div className="mt-8 rounded-[1.75rem] border border-emerald-300/10 bg-emerald-300/8 p-4 text-left">
+        <p className="text-xs uppercase tracking-[0.28em] text-emerald-200/75">Platform posture</p>
+        <p className="mt-2 text-sm font-medium text-white">Architecture is ready for new modules.</p>
+        <p className="mt-2 text-sm leading-6 text-stone-300">
+          Add future agronomy, machinery, finance, compliance, and AI layers without collapsing the app shell.
+        </p>
+      </div>
     </aside>
   )
 }

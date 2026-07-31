@@ -19,6 +19,12 @@ const pillars = [
   },
 ]
 
+const platformSignals = [
+  'Sentinel-centered field monitoring',
+  'Module contracts for long-term growth',
+  'SaaS shell built for agronomy, water, and operations',
+]
+
 export function LandingPage() {
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(185,255,177,0.22),_transparent_28%),linear-gradient(180deg,_#0f172a_0%,_#111827_42%,_#020617_100%)] text-stone-50">
@@ -48,21 +54,35 @@ export function LandingPage() {
         <section className="grid flex-1 items-center gap-12 py-16 lg:grid-cols-[1.2fr_0.8fr] lg:py-24">
           <div className="space-y-8">
             <div className="inline-flex items-center gap-2 rounded-full border border-emerald-300/20 bg-emerald-300/10 px-3 py-1 text-xs uppercase tracking-[0.3em] text-emerald-200">
-              Future-proof architecture
+              New-generation agricultural SaaS
             </div>
             <div className="space-y-5">
               <h1 className="max-w-4xl text-5xl font-semibold tracking-[-0.06em] text-white sm:text-6xl lg:text-7xl">
-                A modern agricultural SaaS that can absorb new modules for years.
+                Sentinel-first software for farms, cooperatives, and agri operations teams.
               </h1>
               <p className="max-w-2xl text-base leading-8 text-stone-300 sm:text-lg">
-                The app is now organized around route shells, integration boundaries, reusable primitives,
-                and isolated module contracts instead of a flat starter template.
+                AgriMind is now shaped as a professional SaaS foundation with a modular app shell, field
+                intelligence workspace, and a design language ready for years of new products.
               </p>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-3">
+              {platformSignals.map((signal) => (
+                <div key={signal} className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-4 text-sm text-stone-200">
+                  {signal}
+                </div>
+              ))}
             </div>
           </div>
 
           <div className="rounded-[2rem] border border-white/10 bg-white/5 p-5 shadow-2xl shadow-emerald-950/20 backdrop-blur">
             <div className="rounded-[1.5rem] border border-white/10 bg-stone-950/80 p-5">
+              <div className="mb-4 rounded-2xl border border-emerald-300/12 bg-emerald-300/7 px-4 py-4">
+                <p className="text-xs uppercase tracking-[0.3em] text-emerald-200/80">Live design direction</p>
+                <p className="mt-2 text-sm leading-6 text-stone-300">
+                  The `/app` workspace now demonstrates a full-size Sentinel map focused on Shumen and a SaaS
+                  dashboard structure that can host future agronomy modules.
+                </p>
+              </div>
               <div className="grid gap-4">
                 {pillars.map(({ title, description, icon: Icon }) => (
                   <article key={title} className="rounded-2xl border border-white/8 bg-white/[0.03] p-5">

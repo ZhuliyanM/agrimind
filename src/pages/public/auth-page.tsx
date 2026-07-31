@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { ArrowRight, LoaderCircle, Mail, ShieldCheck } from 'lucide-react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Navigate } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { z } from 'zod'
 import { getSupabaseEnvIssue, hasSupabaseEnv } from '@/app/config/env.ts'
 import { useAuth } from '@/features/auth/model/use-auth.ts'
@@ -72,6 +72,14 @@ export function AuthPage() {
                 ? 'Supabase environment variables are configured. You can test the auth entry flow now.'
                 : getSupabaseEnvIssue() ?? 'Supabase environment variables are missing.'}
             </p>
+            {!isConfigured ? (
+              <Link
+                to="/app"
+                className="mt-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10"
+              >
+                Continue in demo mode
+              </Link>
+            ) : null}
           </div>
         </section>
 

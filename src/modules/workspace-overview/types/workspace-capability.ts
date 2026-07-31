@@ -4,5 +4,6 @@ export type WorkspaceCapability = {
   title: string
   copy: string
   icon: LucideIcon
-  area: 'modules' | 'state' | 'integrations'
+  area: 'agronomy' | 'water' | 'operations' | 'finance' | 'data' | 'automation'
+  stage: 'Now' | 'Next' | 'Later'
 }

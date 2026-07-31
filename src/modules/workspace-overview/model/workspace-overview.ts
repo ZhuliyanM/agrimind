@@ -1,24 +1,48 @@
-import { Database, Radar, ShieldEllipsis } from 'lucide-react'
+import { Bot, Database, Droplets, Landmark, Radar, Tractor } from 'lucide-react'
 import type { WorkspaceCapability } from '@/modules/workspace-overview/types/workspace-capability.ts'
 
 const workspaceCapabilities: WorkspaceCapability[] = [
   {
-    title: 'Modules',
-    copy: 'Business capabilities live in isolated module folders with their own UI, model, API, and routes.',
+    title: 'Geo agronomy intelligence',
+    copy: 'Satellite layers, field boundaries, scouting notes, and crop health signals live behind one geospatial module.',
     icon: Radar,
-    area: 'modules',
+    area: 'agronomy',
+    stage: 'Now',
   },
   {
-    title: 'State',
-    copy: 'TanStack Query owns server state while Zustand keeps shell state local and explicit.',
-    icon: ShieldEllipsis,
-    area: 'state',
+    title: 'Irrigation operations',
+    copy: 'Water scheduling, pump status, and rainfall overlays can become a standalone operating module.',
+    icon: Droplets,
+    area: 'water',
+    stage: 'Next',
   },
   {
-    title: 'Integrations',
-    copy: 'Supabase clients and repositories sit behind a single gateway for auth, data, storage, and realtime.',
+    title: 'Data and integration fabric',
+    copy: 'Supabase, device feeds, ERP connectors, and event streams remain isolated from the UI surface.',
     icon: Database,
-    area: 'integrations',
+    area: 'data',
+    stage: 'Now',
+  },
+  {
+    title: 'Machinery and field execution',
+    copy: 'Machine tasks, operator workflows, and seasonal checklists can arrive without disturbing the dashboard shell.',
+    icon: Tractor,
+    area: 'operations',
+    stage: 'Later',
+  },
+  {
+    title: 'Financial and subsidy layer',
+    copy: 'Budgets, grants, compliance, and acreage-linked finance can sit as a dedicated revenue module.',
+    icon: Landmark,
+    area: 'finance',
+    stage: 'Later',
+  },
+  {
+    title: 'Automation and AI copilots',
+    copy: 'Rule engines and agent workflows can automate agronomic alerts and operational responses over time.',
+    icon: Bot,
+    area: 'automation',
+    stage: 'Next',
   },
 ]
 

@@ -15,6 +15,10 @@ export function AuthGuard() {
     )
   }
 
+  if (status === 'env-missing') {
+    return <Outlet />
+  }
+
   if (status !== 'authenticated') {
     return <Navigate to="/auth" replace state={{ from: location }} />
   }
