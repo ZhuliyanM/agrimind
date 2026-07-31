@@ -1,5 +1,4 @@
 import 'leaflet/dist/leaflet.css'
-import { Layers3, MapPinned, Satellite, Sprout } from 'lucide-react'
 import { Circle, MapContainer, Polygon, Rectangle, TileLayer, Tooltip } from 'react-leaflet'
 import {
   fieldSignals,
@@ -34,45 +33,17 @@ function getNdviColor(value: number) {
 
 export function SentinelMapCard() {
   const mapLayer = useShellStore((state) => state.mapLayer)
-  const setMapLayer = useShellStore((state) => state.setMapLayer)
   const selectedParcelId = useShellStore((state) => state.selectedParcelId)
   const setSelectedParcelId = useShellStore((state) => state.setSelectedParcelId)
 
   return (
-    <section className="relative h-full w-full">
-      <div className="absolute right-3 top-[124px] z-[800] grid gap-2 sm:right-5">
-        <button
-          type="button"
-          onClick={() => setMapLayer('sentinel')}
-          className={[
-            'flex items-center gap-2 rounded-full border px-4 py-2 text-xs uppercase tracking-[0.24em] backdrop-blur',
-            mapLayer === 'sentinel'
-              ? 'border-emerald-300/70 bg-emerald-300/20 text-emerald-100'
-              : 'border-white/20 bg-stone-950/70 text-stone-300 hover:text-white',
-          ].join(' ')}
-        >
-          <Satellite className="h-3.5 w-3.5" /> Sentinel RGB
-        </button>
-        <button
-          type="button"
-          onClick={() => setMapLayer('ndvi')}
-          className={[
-            'flex items-center gap-2 rounded-full border px-4 py-2 text-xs uppercase tracking-[0.24em] backdrop-blur',
-            mapLayer === 'ndvi'
-              ? 'border-lime-300/70 bg-lime-300/20 text-lime-100'
-              : 'border-white/20 bg-stone-950/70 text-stone-300 hover:text-white',
-          ].join(' ')}
-        >
-          <Layers3 className="h-3.5 w-3.5" /> NDVI
-        </button>
-      </div>
-
+    <section className="h-full w-full overflow-hidden rounded-[0.9rem]">
       <div className="relative h-full">
         <MapContainer
           center={shumenCenter}
           zoom={11}
           scrollWheelZoom={true}
-          className="h-screen w-full bg-stone-950"
+          className="h-full w-full bg-stone-950"
         >
           <TileLayer attribution={sentinelAttribution} url={sentinelTileUrl} />
           {mapLayer === 'ndvi' ? (
@@ -130,29 +101,6 @@ export function SentinelMapCard() {
             </Circle>
           ))}
         </MapContainer>
-
-        <div className="pointer-events-none absolute left-3 top-[124px] z-[750] grid gap-3 sm:left-5 sm:max-w-[410px]">
-          <div className="rounded-[1.7rem] border border-white/20 bg-stone-950/78 px-5 py-4 backdrop-blur-2xl">
-            <div className="flex items-center gap-2 text-emerald-200">
-              <MapPinned className="h-4 w-4" />
-              <span className="text-xs uppercase tracking-[0.28em]">Shumen geospatial cockpit</span>
-            </div>
-            <h2 className="mt-2 text-2xl font-semibold text-white">Fullscreen map with hover command surfaces</h2>
-            <p className="mt-2 text-sm leading-6 text-stone-300">
-              Real OSM farmland boundaries are clickable. Switch to NDVI mode to inspect vegetation vigor by parcel.
-            </p>
-          </div>
-        </div>
-
-        <div className="pointer-events-none absolute bottom-4 right-4 z-[700] rounded-2xl border border-white/20 bg-stone-950/80 px-4 py-3 backdrop-blur">
-          <div className="flex items-center gap-2 text-emerald-200">
-            <Sprout className="h-4 w-4" />
-            <span className="text-xs uppercase tracking-[0.26em]">NDVI mode</span>
-          </div>
-          <p className="mt-1 text-xs leading-5 text-stone-300">
-            NDVI layer source: NASA GIBS MODIS Terra 16-day. Parcel shading is tuned for at-a-glance decision support.
-          </p>
-        </div>
       </div>
     </section>
   )

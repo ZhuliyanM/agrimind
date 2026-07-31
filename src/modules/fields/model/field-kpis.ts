@@ -18,16 +18,16 @@ export function getFieldKpis() {
 
   return [
     {
-      label: 'Active fields',
+      label: 'Активни полета',
       value: String(parcelOutlines.length),
     },
     {
-      label: 'Average NDVI',
+      label: 'Среден NDVI',
       value: averageNdvi.toFixed(2),
     },
     {
-      label: 'Selected region',
-      value: 'Shumen',
+      label: 'Избран регион',
+      value: 'Шумен',
     },
   ]
 }

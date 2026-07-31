@@ -19,27 +19,27 @@ export const ndviAttribution = '&copy; NASA GIBS MODIS Terra NDVI 16-Day'
 
 export const fieldSignals = [
   {
-    label: 'North cooperative belt',
+    label: 'Северен кооперативен пояс',
     position: [43.323, 26.913] as [number, number],
-    note: 'Suitable for crop vigor and parcel comparison modules.',
+    note: 'Подходящ за сравнение на вегетация и парцелни анализи.',
   },
   {
-    label: 'Shumen east parcels',
+    label: 'Източни парцели край Шумен',
     position: [43.279, 27.032] as [number, number],
-    note: 'Good anchor point for irrigation, field notes, and task orchestration.',
+    note: 'Ключова зона за поливане, полеви бележки и оркестрация на задачи.',
   },
   {
-    label: 'South-west trial blocks',
+    label: 'Югозападни тестови блокове',
     position: [43.223, 26.792] as [number, number],
-    note: 'Use for scouting workflows, benchmarking, and AI-assisted recommendations.',
+    note: 'Използвай за огледи, бенчмарк и AI препоръки.',
   },
 ]
 
 export const parcelOutlines = [
   {
     id: '234183485',
-    name: 'Parcel 234183485',
-    crop: 'Wheat',
+    name: 'Парцел 234183485',
+    crop: 'Пшеница',
     area: '102 ha',
     polygon: [
       [43.319385, 26.97947],
@@ -57,8 +57,8 @@ export const parcelOutlines = [
   },
   {
     id: '234183486',
-    name: 'Parcel 234183486',
-    crop: 'Sunflower',
+    name: 'Парцел 234183486',
+    crop: 'Слънчоглед',
     area: '118 ha',
     polygon: [
       [43.314701, 26.987336],
@@ -83,8 +83,8 @@ export const parcelOutlines = [
   },
   {
     id: '258599123',
-    name: 'Parcel 258599123',
-    crop: 'Maize',
+    name: 'Парцел 258599123',
+    crop: 'Царевица',
     area: '136 ha',
     polygon: [
       [43.29957, 26.933324],
@@ -111,8 +111,8 @@ export const parcelOutlines = [
   },
   {
     id: '313304850',
-    name: 'Parcel 313304850',
-    crop: 'Barley',
+    name: 'Парцел 313304850',
+    crop: 'Ечемик',
     area: '76 ha',
     polygon: [
       [43.266171, 26.977125],
@@ -133,8 +133,8 @@ export const parcelOutlines = [
   },
   {
     id: '313304851',
-    name: 'Parcel 313304851',
-    crop: 'Rapeseed',
+    name: 'Парцел 313304851',
+    crop: 'Рапица',
     area: '141 ha',
     polygon: [
       [43.268801, 26.967645],
@@ -166,8 +166,8 @@ export const parcelOutlines = [
   },
   {
     id: '314432044',
-    name: 'Parcel 314432044',
-    crop: 'Sunflower',
+    name: 'Парцел 314432044',
+    crop: 'Слънчоглед',
     area: '54 ha',
     polygon: [
       [43.282679, 26.949121],
@@ -185,8 +185,8 @@ export const parcelOutlines = [
   },
   {
     id: '315658111',
-    name: 'Parcel 315658111',
-    crop: 'Maize',
+    name: 'Парцел 315658111',
+    crop: 'Царевица',
     area: '47 ha',
     polygon: [
       [43.282768, 26.95116],
@@ -202,8 +202,8 @@ export const parcelOutlines = [
   },
   {
     id: '316439803',
-    name: 'Parcel 316439803',
-    crop: 'Wheat',
+    name: 'Парцел 316439803',
+    crop: 'Пшеница',
     area: '89 ha',
     polygon: [
       [43.279399, 26.97127],
@@ -225,61 +225,61 @@ export const parcelOutlines = [
 ]
 
 export const heroSignals = [
-  { label: 'Observed territory', value: 'Shumen region' },
-  { label: 'Satellite basis', value: 'Sentinel-2 cloudless' },
-  { label: 'Design mode', value: 'Fullscreen map + hover command UI' },
+  { label: 'Наблюдавана територия', value: 'Регион Шумен' },
+  { label: 'Сателитна основа', value: 'Sentinel-2 cloudless' },
+  { label: 'Режим', value: 'Карта на цял екран + контекстни менюта' },
 ]
 
 export const readinessStats = [
-  { label: 'Layer focus', value: 'Sentinel-2 cloudless' },
-  { label: 'Demo region', value: 'Shumen agricultural zone' },
-  { label: 'Expansion model', value: 'Modular SaaS workspace' },
+  { label: 'Фокус слой', value: 'Sentinel-2 cloudless' },
+  { label: 'Демо регион', value: 'Земеделска зона Шумен' },
+  { label: 'Модел растеж', value: 'Модулна SaaS среда' },
 ]
 
 export const readinessModules = [
   {
-    title: 'Crop performance lane',
-    copy: 'Designed to host NDVI, stress maps, field scouting, and seasonal observations.',
+    title: 'Агрономичен модул',
+    copy: 'Подготвен за NDVI, стрес карти, полеви огледи и сезонни наблюдения.',
   },
   {
-    title: 'Irrigation control lane',
-    copy: 'Ready for pump dashboards, water schedules, rainfall overlays, and anomaly warnings.',
+    title: 'Модул за напояване',
+    copy: 'Готов за помпени табла, графици за вода, валежни слоеве и аномалии.',
   },
   {
-    title: 'Operations lane',
-    copy: 'Prepared for machinery tasks, labor boards, logistics, and automated alerts.',
+    title: 'Оперативен модул',
+    copy: 'Подготвен за задачи, екипи, логистика и автоматични известия.',
   },
 ]
 
 export const operationalAlerts = [
   {
-    title: 'Scouting queue: east parcels',
-    description: 'Set up crop health review cards, pest notes, and field observations against parcel B next.',
+    title: 'Опашка за оглед: източни парцели',
+    description: 'Подготви преглед на растителното здраве, бележки за вредители и полеви наблюдения.',
     tone: 'attention',
   },
   {
-    title: 'Irrigation readiness layer',
-    description: 'The layout is ready for pump status, rainfall windows, and moisture warnings beside the map.',
+    title: 'Слой за готовност на напояване',
+    description: 'Оформлението е готово за статус на помпи, валежни прозорци и предупреждения за влажност.',
     tone: 'ready',
   },
   {
-    title: 'Satellite comparison workflow',
-    description: 'Future temporal imagery toggles can live inside this same map frame without redesigning the shell.',
+    title: 'Сравнение на сателитни периоди',
+    description: 'Временни превключвания на изображения могат да се добавят в същата рамка без нов редизайн.',
     tone: 'planned',
   },
 ]
 
 export const morningBrief = [
   {
-    label: 'Priority parcels',
-    value: '8 real OSM farmland parcels',
+    label: 'Приоритетни парцели',
+    value: '8 реални OSM парцела',
   },
   {
-    label: 'Imagery cadence',
-    value: 'Sentinel RGB + NDVI layer',
+    label: 'Изображение',
+    value: 'Sentinel RGB + NDVI слой',
   },
   {
-    label: 'Next module lane',
-    value: 'Fields operations cockpit',
+    label: 'Следващ модул',
+    value: 'Оперативен център за полета',
   },
 ]

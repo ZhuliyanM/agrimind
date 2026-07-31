@@ -9,36 +9,36 @@ export function FieldsCommandPanel() {
   const selectedParcel = parcelOutlines.find((parcel) => parcel.id === selectedParcelId) ?? parcelOutlines[0]
   const selectedNdvi = getParcelNdvi(selectedParcel?.id ?? null)
   const kpis = getFieldKpis()
-  const healthBand = (selectedNdvi ?? 0) >= 0.7 ? 'Strong' : (selectedNdvi ?? 0) >= 0.6 ? 'Watch' : 'Intervene'
+  const healthBand = (selectedNdvi ?? 0) >= 0.7 ? 'Стабилно' : (selectedNdvi ?? 0) >= 0.6 ? 'Наблюдение' : 'Намеса'
 
   return (
-    <section className="pointer-events-auto rounded-[1.5rem] border border-white/20 bg-stone-950/84 p-4 backdrop-blur-2xl sm:p-5">
+    <section className="pointer-events-auto flex h-full max-h-[44svh] min-h-[280px] flex-col overflow-hidden rounded-[1rem] border border-white/20 bg-stone-950/84 p-3 backdrop-blur-2xl sm:rounded-[1.2rem] sm:p-3.5 xl:max-h-none xl:min-h-0">
       <div className="flex items-center justify-between gap-3">
         <div>
-          <p className="text-[11px] uppercase tracking-[0.26em] text-emerald-200/75">Fields module</p>
-          <h3 className="mt-1 text-lg font-semibold text-white">Parcel dashboard</h3>
+          <p className="text-[11px] uppercase tracking-[0.22em] text-emerald-200/75">Модул Полета</p>
+          <h3 className="mt-1 text-sm font-semibold text-white sm:text-base">Табло за парцели</h3>
         </div>
         <MapPinned className="h-4 w-4 text-emerald-200" />
       </div>
 
-      <div className="mt-4 grid gap-2 sm:grid-cols-3">
+      <div className="mt-2.5 grid gap-1.5 sm:grid-cols-3">
         {kpis.map((kpi) => (
-          <div key={kpi.label} className="rounded-xl border border-white/10 bg-white/[0.03] px-3 py-3">
-            <p className="text-[10px] uppercase tracking-[0.22em] text-stone-500">{kpi.label}</p>
-            <p className="mt-1 text-sm font-semibold text-white">{kpi.value}</p>
+          <div key={kpi.label} className="rounded-md border border-white/10 bg-white/[0.03] px-2.5 py-2">
+            <p className="text-[10px] uppercase tracking-[0.16em] text-stone-500">{kpi.label}</p>
+            <p className="mt-0.5 text-xs font-semibold text-white sm:text-sm">{kpi.value}</p>
           </div>
         ))}
       </div>
 
-      <div className="mt-4 grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
-        <div>
+      <div className="mt-2.5 grid min-h-0 flex-1 gap-2.5 lg:grid-cols-[1fr_0.9fr]">
+        <div className="min-h-0">
           <div className="flex items-center justify-between gap-3">
-            <p className="text-xs uppercase tracking-[0.24em] text-stone-500">Field list</p>
+            <p className="text-xs uppercase tracking-[0.2em] text-stone-500">Списък с полета</p>
             <span className="rounded-full border border-white/10 bg-white/[0.03] px-2 py-1 text-[10px] uppercase tracking-[0.2em] text-stone-400">
-              Live sync
+              Жива синхр.
             </span>
           </div>
-          <div className="mt-2 grid max-h-[190px] gap-2 overflow-auto pr-1">
+          <div className="mt-2 grid max-h-[22svh] gap-1.5 overflow-auto pr-1 sm:max-h-[24svh] xl:max-h-none xl:flex-1">
             {parcelOutlines.map((parcel) => {
               const isActive = selectedParcel?.id === parcel.id
 
@@ -48,7 +48,7 @@ export function FieldsCommandPanel() {
                   key={parcel.id}
                   onClick={() => setSelectedParcelId(parcel.id)}
                   className={[
-                    'rounded-xl border px-3 py-3 text-left text-sm transition',
+                    'rounded-md border px-2.5 py-2 text-left text-xs transition sm:text-sm',
                     isActive
                       ? 'border-emerald-300/60 bg-emerald-300/14 text-white'
                       : 'border-white/10 bg-white/[0.02] text-stone-300 hover:border-white/20 hover:text-white',
@@ -64,35 +64,35 @@ export function FieldsCommandPanel() {
           </div>
         </div>
 
-        <article className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
+        <article className="rounded-lg border border-white/10 bg-white/[0.03] p-3.5">
           <div className="flex items-center gap-2 text-lime-200">
             <TrendingUp className="h-4 w-4" />
-            <p className="text-xs uppercase tracking-[0.24em]">Selected field</p>
+            <p className="text-xs uppercase tracking-[0.2em]">Избрано поле</p>
           </div>
-          <p className="mt-2 text-base font-semibold text-white">{selectedParcel?.name}</p>
-          <div className="mt-3 space-y-2 text-sm text-stone-300">
+          <p className="mt-1.5 text-sm font-semibold text-white">{selectedParcel?.name}</p>
+          <div className="mt-2 space-y-1 text-xs text-stone-300 sm:text-sm">
             <p>
-              Crop profile: <span className="text-white">{selectedParcel?.crop}</span>
+              Култура: <span className="text-white">{selectedParcel?.crop}</span>
             </p>
             <p>
-              Registered area: <span className="text-white">{selectedParcel?.area}</span>
+              Площ: <span className="text-white">{selectedParcel?.area}</span>
             </p>
             <p>
-              NDVI indicator: <span className="text-white">{selectedNdvi?.toFixed(2) ?? 'n/a'}</span>
+              NDVI индекс: <span className="text-white">{selectedNdvi?.toFixed(2) ?? 'няма данни'}</span>
             </p>
             <p>
-              Health band: <span className="text-white">{healthBand}</span>
+              Състояние: <span className="text-white">{healthBand}</span>
             </p>
           </div>
-          <div className="mt-4 rounded-xl border border-lime-300/20 bg-lime-300/10 px-3 py-3 text-xs leading-5 text-lime-100">
+          <div className="mt-2 rounded-md border border-lime-300/20 bg-lime-300/10 px-2.5 py-2 text-[11px] leading-5 text-lime-100 sm:text-xs">
             <div className="mb-1 flex items-center gap-1.5">
               <Sprout className="h-3.5 w-3.5" />
-              Recommendation
+              Препоръка
             </div>
-            Prioritize scouting for fields with NDVI below 0.60 and compare with irrigation calendar before dispatch.
+            Приоритизирай оглед за полета с NDVI под 0.60 и сравни с поливния график преди изпращане на екип.
           </div>
-          <div className="mt-3 rounded-xl border border-white/10 bg-white/[0.02] px-3 py-3 text-xs leading-5 text-stone-300">
-            SLA target: triage within 45 min, field dispatch under 2h, follow-up imagery check in 24h.
+          <div className="mt-2 rounded-md border border-white/10 bg-white/[0.02] px-2.5 py-2 text-[11px] leading-5 text-stone-300 sm:text-xs">
+            SLA: триаж до 45 мин, изпращане на екип до 2 ч, повторна проверка до 24 ч.
           </div>
         </article>
       </div>
