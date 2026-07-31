@@ -1,12 +1,3 @@
-export function getSupabaseEnv() {
-  return {
-    url: import.meta.env.VITE_SUPABASE_URL,
-    anonKey: import.meta.env.VITE_SUPABASE_ANON_KEY,
-  }
-}
+import { getSupabaseEnv, hasSupabaseEnv } from '@/app/config/env.ts'
 
-export function hasSupabaseEnv() {
-  const { url, anonKey } = getSupabaseEnv()
-
-  return Boolean(url && anonKey)
-}
+export { getSupabaseEnv, hasSupabaseEnv }

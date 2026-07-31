@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom'
-import { Sidebar } from '../../widgets/sidebar/sidebar.tsx'
-import { Topbar } from '../../widgets/topbar/topbar.tsx'
+import { Sidebar } from '@/widgets/sidebar/sidebar.tsx'
+import { Topbar } from '@/widgets/topbar/topbar.tsx'
 
 export function AppShellLayout() {
   return (

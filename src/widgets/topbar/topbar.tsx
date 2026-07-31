@@ -1,9 +1,17 @@
 import { Bell, CloudSun, Search } from 'lucide-react'
-import { useShellStore } from '../../shared/lib/shell-store.ts'
+import { useAuth } from '@/features/auth/model/use-auth.ts'
+import { useShellStore } from '@/shared/lib/shell-store.ts'
 
 export function Topbar() {
   const searchQuery = useShellStore((state) => state.searchQuery)
   const setSearchQuery = useShellStore((state) => state.setSearchQuery)
+  const { session, status } = useAuth()
+  const statusLabel = {
+    authenticated: session?.user.email ?? 'Authenticated',
+    anonymous: 'Anonymous',
+    'env-missing': 'Supabase not configured',
+    loading: 'Checking session',
+  }[status]
 
   return (
     <header className="border-b border-white/10 bg-stone-950/60 px-6 py-5 backdrop-blur lg:px-10">
@@ -11,6 +19,7 @@ export function Topbar() {
         <div>
           <p className="text-sm uppercase tracking-[0.3em] text-stone-500">Workspace</p>
           <p className="mt-2 text-2xl font-semibold text-white">SaaS architecture control plane</p>
+          <p className="mt-1 text-sm text-stone-400">{statusLabel}</p>
         </div>
 
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center">

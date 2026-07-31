@@ -1,0 +1,1 @@
+export { WorkspaceOverviewPanel } from '@/modules/workspace-overview/ui/workspace-overview-panel.tsx'

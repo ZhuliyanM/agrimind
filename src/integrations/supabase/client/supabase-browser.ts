@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
-import { getSupabaseEnv, hasSupabaseEnv } from './env.ts'
+import { getSupabaseEnv, hasSupabaseEnv } from '@/integrations/supabase/client/env.ts'
 
 let supabaseClient: ReturnType<typeof createClient> | null = null
 

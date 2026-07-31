@@ -28,13 +28,21 @@ export function LandingPage() {
             <p className="text-sm uppercase tracking-[0.35em] text-emerald-200/80">AgriMind</p>
             <p className="text-xs text-stone-400">Scalable SaaS foundation</p>
           </div>
-          <Link
-            to="/app"
-            className="inline-flex items-center gap-2 rounded-full bg-emerald-300 px-4 py-2 text-sm font-medium text-stone-950 transition hover:bg-emerald-200"
-          >
-            Open shell
-            <ArrowRight className="h-4 w-4" />
-          </Link>
+          <div className="flex items-center gap-3">
+            <Link
+              to="/auth"
+              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10"
+            >
+              Open auth
+            </Link>
+            <Link
+              to="/app"
+              className="inline-flex items-center gap-2 rounded-full bg-emerald-300 px-4 py-2 text-sm font-medium text-stone-950 transition hover:bg-emerald-200"
+            >
+              Open shell
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
         </header>
 
         <section className="grid flex-1 items-center gap-12 py-16 lg:grid-cols-[1.2fr_0.8fr] lg:py-24">

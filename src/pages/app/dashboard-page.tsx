@@ -1,24 +1,12 @@
-import { Database, Radar, ShieldEllipsis } from 'lucide-react'
-
-const architectureCards = [
-  {
-    title: 'Modules',
-    copy: 'Business capabilities live in isolated module folders with their own UI, model, API, and routes.',
-    icon: Radar,
-  },
-  {
-    title: 'State',
-    copy: 'TanStack Query handles server state while lightweight Zustand stores own client-side shell state.',
-    icon: ShieldEllipsis,
-  },
-  {
-    title: 'Integrations',
-    copy: 'Supabase clients and repositories sit behind one gateway layer for auth, data, storage, and realtime.',
-    icon: Database,
-  },
-]
+import { AuthStatusCard } from '@/features/auth/ui/auth-status-card.tsx'
+import { useAuth } from '@/features/auth/model/use-auth.ts'
+import { WorkspaceOverviewPanel } from '@/modules/workspace-overview/index.ts'
+import { useShellStore } from '@/shared/lib/shell-store.ts'
 
 export function DashboardPage() {
+  const searchQuery = useShellStore((state) => state.searchQuery)
+  const { session } = useAuth()
+
   return (
     <div className="space-y-8">
       <section className="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
@@ -33,27 +21,10 @@ export function DashboardPage() {
           </p>
         </article>
 
-        <article className="rounded-[2rem] border border-emerald-300/15 bg-emerald-300/8 p-8">
-          <p className="text-sm uppercase tracking-[0.3em] text-emerald-200/70">Supabase boundary</p>
-          <div className="mt-6 space-y-3 text-sm leading-7 text-stone-300">
-            <p>Browser-safe credentials are expected through Vite environment variables.</p>
-            <p>Raw SDK usage is restricted to the integrations layer.</p>
-            <p>Future repositories can expose typed query functions to modules and features.</p>
-          </div>
-        </article>
+        <AuthStatusCard email={session?.user.email} />
       </section>
 
-      <section className="grid gap-4 lg:grid-cols-3">
-        {architectureCards.map(({ title, copy, icon: Icon }) => (
-          <article key={title} className="rounded-[1.5rem] border border-white/10 bg-stone-900/80 p-6">
-            <div className="mb-4 inline-flex rounded-2xl bg-white/5 p-3 text-emerald-200">
-              <Icon className="h-5 w-5" />
-            </div>
-            <h2 className="text-xl font-semibold text-white">{title}</h2>
-            <p className="mt-3 text-sm leading-7 text-stone-400">{copy}</p>
-          </article>
-        ))}
-      </section>
+      <WorkspaceOverviewPanel searchQuery={searchQuery} />
     </div>
   )
 }
