@@ -38,7 +38,7 @@ export function SentinelMapCard() {
           center={shumenCenter}
           zoom={11}
           scrollWheelZoom={true}
-          className="h-[620px] w-full bg-stone-950"
+          className="h-[72svh] min-h-[640px] w-full bg-stone-950"
         >
           <TileLayer attribution={sentinelAttribution} url={sentinelTileUrl} />
           <Rectangle bounds={shumenBounds} pathOptions={{ color: '#86efac', weight: 2, fillOpacity: 0.06 }} />

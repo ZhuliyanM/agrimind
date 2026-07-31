@@ -17,6 +17,8 @@ export function DashboardPage() {
 
   return (
     <div className="space-y-8">
+      <SentinelMapCard />
+
       <section className="grid gap-6 xl:grid-cols-[1.15fr_0.85fr]">
         <article className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-8 shadow-lg shadow-black/10">
           <p className="text-sm uppercase tracking-[0.3em] text-emerald-200/75">Prototype workspace</p>
@@ -41,12 +43,10 @@ export function DashboardPage() {
         <AuthStatusCard email={session?.user.email} />
       </section>
 
-      <section className="grid gap-6 xl:grid-cols-[1.35fr_0.65fr]">
-        <SentinelMapCard />
+      <section className="grid gap-6 xl:grid-cols-[0.9fr_1.1fr]">
         <OperationsReadinessPanel />
+        <WorkspaceOverviewPanel searchQuery={searchQuery} />
       </section>
-
-      <WorkspaceOverviewPanel searchQuery={searchQuery} />
     </div>
   )
 }
