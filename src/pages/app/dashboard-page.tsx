@@ -1,52 +1,41 @@
 import { AuthStatusCard } from '@/features/auth/ui/auth-status-card.tsx'
 import { useAuth } from '@/features/auth/model/use-auth.ts'
-import { OperationsReadinessPanel } from '@/modules/field-intelligence/index.ts'
 import { SentinelMapCard } from '@/modules/field-intelligence/index.ts'
-import { WorkspaceOverviewPanel } from '@/modules/workspace-overview/index.ts'
-import { useShellStore } from '@/shared/lib/shell-store.ts'
+import { FieldsCommandPanel } from '@/modules/fields/index.ts'
+import { OperationsHubPanel } from '@/modules/operations/index.ts'
 
 const northStarStats = [
-  { label: 'Reference region', value: 'Shumen' },
-  { label: 'Primary imagery', value: 'Sentinel-2' },
-  { label: 'Expansion model', value: 'Module-based' },
+  { label: 'Region', value: 'Shumen farmland belt' },
+  { label: 'Boundaries', value: 'OSM real parcels' },
+  { label: 'Imagery', value: 'Sentinel + NDVI mode' },
+  { label: 'Live incidents', value: 'Interactive queue' },
 ]
 
 export function DashboardPage() {
-  const searchQuery = useShellStore((state) => state.searchQuery)
   const { session } = useAuth()
 
   return (
-    <div className="space-y-8">
+    <div className="relative h-full w-full overflow-hidden">
       <SentinelMapCard />
 
-      <section className="grid gap-6 xl:grid-cols-[1.15fr_0.85fr]">
-        <article className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-8 shadow-lg shadow-black/10">
-          <p className="text-sm uppercase tracking-[0.3em] text-emerald-200/75">Prototype workspace</p>
-          <h1 className="mt-4 max-w-4xl text-4xl font-semibold tracking-[-0.05em] text-white xl:text-5xl">
-            AgriMind now looks and behaves like a serious agricultural SaaS product, not a starter template.
-          </h1>
-          <p className="mt-4 max-w-2xl text-base leading-8 text-stone-300">
-            This sample dashboard is shaped around a large Sentinel field view for Shumen, a modular
-            control surface, and a UI system built to absorb agronomy, irrigation, machinery, finance,
-            and compliance modules over time.
-          </p>
-          <div className="mt-6 grid gap-3 sm:grid-cols-3">
-            {northStarStats.map((item) => (
-              <div key={item.label} className="rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-4">
-                <p className="text-xs uppercase tracking-[0.28em] text-stone-500">{item.label}</p>
-                <p className="mt-2 text-lg font-semibold text-white">{item.value}</p>
-              </div>
-            ))}
+      <div className="pointer-events-none absolute inset-x-3 bottom-3 z-[920] grid gap-3 xl:inset-x-5 xl:bottom-4">
+        <div className="pointer-events-auto grid gap-2 rounded-[1.3rem] border border-white/20 bg-stone-950/82 p-3 backdrop-blur-2xl sm:grid-cols-4">
+          {northStarStats.map((item) => (
+            <div key={item.label} className="rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2.5">
+              <p className="text-[10px] uppercase tracking-[0.24em] text-stone-500">{item.label}</p>
+              <p className="mt-1 text-sm font-semibold text-white">{item.value}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="grid gap-3 xl:grid-cols-[1.1fr_1.3fr_0.7fr]">
+          <FieldsCommandPanel />
+          <OperationsHubPanel />
+          <div className="pointer-events-auto">
+            <AuthStatusCard email={session?.user.email} />
           </div>
-        </article>
-
-        <AuthStatusCard email={session?.user.email} />
-      </section>
-
-      <section className="grid gap-6 xl:grid-cols-[0.9fr_1.1fr]">
-        <OperationsReadinessPanel />
-        <WorkspaceOverviewPanel searchQuery={searchQuery} />
-      </section>
+        </div>
+      </div>
     </div>
   )
 }

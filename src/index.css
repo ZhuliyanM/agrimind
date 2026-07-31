@@ -1,11 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
 @import 'tailwindcss';
 
 :root {
-  font-family: 'Segoe UI', sans-serif;
+  --ag-bg-1: #0b1220;
+  --ag-bg-2: #101a2f;
+  --ag-bg-3: #1f2a1d;
+  --ag-glow: rgba(141, 255, 110, 0.16);
+  font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color: #f5f5f4;
-  background: #020617;
+  background: #070c16;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -25,8 +30,10 @@ body,
 body {
   margin: 0;
   background:
-    radial-gradient(circle at top, rgba(52, 211, 153, 0.14), transparent 24%),
-    linear-gradient(180deg, #0f172a 0%, #111827 42%, #020617 100%);
+    radial-gradient(1200px 500px at 82% -12%, var(--ag-glow), transparent 54%),
+    radial-gradient(800px 500px at -5% 95%, rgba(94, 234, 212, 0.12), transparent 52%),
+    linear-gradient(155deg, var(--ag-bg-1) 0%, var(--ag-bg-2) 52%, var(--ag-bg-3) 100%);
+  animation: agAmbient 1.2s ease-out;
 }
 
 a {
@@ -41,6 +48,13 @@ select {
   font: inherit;
 }
 
+code,
+kbd,
+pre,
+.mono {
+  font-family: 'IBM Plex Mono', Consolas, monospace;
+}
+
 ::selection {
   background: rgba(52, 211, 153, 0.35);
   color: white;
@@ -48,4 +62,15 @@ select {
 
 #root {
   min-height: 100svh;
+}
+
+@keyframes agAmbient {
+  0% {
+    filter: saturate(88%);
+    opacity: 0.92;
+  }
+  100% {
+    filter: saturate(100%);
+    opacity: 1;
+  }
 }

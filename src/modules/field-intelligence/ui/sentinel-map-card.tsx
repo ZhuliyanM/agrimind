@@ -1,59 +1,115 @@
 import 'leaflet/dist/leaflet.css'
-import { Layers3, MapPinned, Satellite, Sprout, Waypoints } from 'lucide-react'
+import { Layers3, MapPinned, Satellite, Sprout } from 'lucide-react'
 import { Circle, MapContainer, Polygon, Rectangle, TileLayer, Tooltip } from 'react-leaflet'
 import {
   fieldSignals,
-  heroSignals,
+  ndviAttribution,
+  ndviDefaultTime,
+  ndviTileUrl,
   parcelOutlines,
-  readinessStats,
   sentinelAttribution,
   sentinelTileUrl,
   shumenBounds,
   shumenCenter,
 } from '@/modules/field-intelligence/model/shumen-region.ts'
+import { useShellStore } from '@/shared/lib/shell-store.ts'
+
+const ndviByParcel: Record<string, number> = {
+  '234183485': 0.78,
+  '234183486': 0.71,
+  '258599123': 0.63,
+  '313304850': 0.59,
+  '313304851': 0.74,
+  '314432044': 0.66,
+  '315658111': 0.53,
+  '316439803': 0.69,
+}
+
+function getNdviColor(value: number) {
+  if (value >= 0.72) return '#16a34a'
+  if (value >= 0.65) return '#65a30d'
+  if (value >= 0.58) return '#eab308'
+  return '#f97316'
+}
 
 export function SentinelMapCard() {
-  return (
-    <section className="overflow-hidden rounded-[2rem] border border-white/10 bg-stone-950/70 shadow-2xl shadow-black/20">
-      <div className="flex flex-col gap-5 border-b border-white/10 px-6 py-6 lg:flex-row lg:items-end lg:justify-between">
-        <div>
-          <p className="text-sm uppercase tracking-[0.3em] text-emerald-200/75">Field intelligence</p>
-          <h2 className="mt-3 text-3xl font-semibold text-white">Sentinel workspace anchored on Shumen</h2>
-          <p className="mt-3 max-w-3xl text-sm leading-7 text-stone-400">
-            This is the visual core of the product direction: a large operational map that can accumulate
-            agronomic layers, irrigation overlays, machine execution, and AI recommendations around one place.
-          </p>
-        </div>
+  const mapLayer = useShellStore((state) => state.mapLayer)
+  const setMapLayer = useShellStore((state) => state.setMapLayer)
+  const selectedParcelId = useShellStore((state) => state.selectedParcelId)
+  const setSelectedParcelId = useShellStore((state) => state.setSelectedParcelId)
 
-        <div className="grid gap-3 sm:grid-cols-3">
-          {readinessStats.map((item) => (
-            <div key={item.label} className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-4">
-              <p className="text-[11px] uppercase tracking-[0.28em] text-stone-500">{item.label}</p>
-              <p className="mt-2 text-sm font-medium text-white">{item.value}</p>
-            </div>
-          ))}
-        </div>
+  return (
+    <section className="relative h-full w-full">
+      <div className="absolute right-3 top-[124px] z-[800] grid gap-2 sm:right-5">
+        <button
+          type="button"
+          onClick={() => setMapLayer('sentinel')}
+          className={[
+            'flex items-center gap-2 rounded-full border px-4 py-2 text-xs uppercase tracking-[0.24em] backdrop-blur',
+            mapLayer === 'sentinel'
+              ? 'border-emerald-300/70 bg-emerald-300/20 text-emerald-100'
+              : 'border-white/20 bg-stone-950/70 text-stone-300 hover:text-white',
+          ].join(' ')}
+        >
+          <Satellite className="h-3.5 w-3.5" /> Sentinel RGB
+        </button>
+        <button
+          type="button"
+          onClick={() => setMapLayer('ndvi')}
+          className={[
+            'flex items-center gap-2 rounded-full border px-4 py-2 text-xs uppercase tracking-[0.24em] backdrop-blur',
+            mapLayer === 'ndvi'
+              ? 'border-lime-300/70 bg-lime-300/20 text-lime-100'
+              : 'border-white/20 bg-stone-950/70 text-stone-300 hover:text-white',
+          ].join(' ')}
+        >
+          <Layers3 className="h-3.5 w-3.5" /> NDVI
+        </button>
       </div>
 
-      <div className="relative">
+      <div className="relative h-full">
         <MapContainer
           center={shumenCenter}
           zoom={11}
           scrollWheelZoom={true}
-          className="h-[72svh] min-h-[640px] w-full bg-stone-950"
+          className="h-screen w-full bg-stone-950"
         >
           <TileLayer attribution={sentinelAttribution} url={sentinelTileUrl} />
+          {mapLayer === 'ndvi' ? (
+            <TileLayer
+              attribution={ndviAttribution}
+              url={ndviTileUrl.replace('{time}', ndviDefaultTime)}
+              opacity={0.42}
+            />
+          ) : null}
           <Rectangle bounds={shumenBounds} pathOptions={{ color: '#86efac', weight: 2, fillOpacity: 0.06 }} />
           {parcelOutlines.map((parcel) => (
             <Polygon
               key={parcel.id}
               positions={parcel.polygon}
-              pathOptions={{ color: '#facc15', weight: 2, fillColor: '#facc15', fillOpacity: 0.14 }}
+              eventHandlers={{ click: () => setSelectedParcelId(parcel.id) }}
+              pathOptions={
+                mapLayer === 'ndvi'
+                  ? {
+                      color: selectedParcelId === parcel.id ? '#ffffff' : '#0f172a',
+                      weight: selectedParcelId === parcel.id ? 3 : 1.6,
+                      fillColor: getNdviColor(ndviByParcel[parcel.id] ?? 0.6),
+                      fillOpacity: selectedParcelId === parcel.id ? 0.52 : 0.36,
+                    }
+                  : {
+                      color: selectedParcelId === parcel.id ? '#22c55e' : '#facc15',
+                      weight: selectedParcelId === parcel.id ? 3 : 2,
+                      fillColor: selectedParcelId === parcel.id ? '#22c55e' : '#facc15',
+                      fillOpacity: selectedParcelId === parcel.id ? 0.3 : 0.14,
+                    }
+              }
             >
               <Tooltip direction="center" opacity={1} permanent={false}>
                 <div className="space-y-1">
                   <p className="text-sm font-semibold">{parcel.name}</p>
-                  <p className="text-xs">{parcel.crop} · {parcel.area}</p>
+                  <p className="text-xs">
+                    {parcel.crop} · {parcel.area} · NDVI {(ndviByParcel[parcel.id] ?? 0).toFixed(2)}
+                  </p>
                 </div>
               </Tooltip>
             </Polygon>
@@ -75,76 +131,27 @@ export function SentinelMapCard() {
           ))}
         </MapContainer>
 
-        <div className="pointer-events-none absolute inset-x-5 top-5 grid gap-4 lg:left-6 lg:right-6 lg:grid-cols-[1.15fr_0.85fr]">
-          <div className="rounded-[2rem] border border-white/10 bg-stone-950/78 px-5 py-5 backdrop-blur">
+        <div className="pointer-events-none absolute left-3 top-[124px] z-[750] grid gap-3 sm:left-5 sm:max-w-[410px]">
+          <div className="rounded-[1.7rem] border border-white/20 bg-stone-950/78 px-5 py-4 backdrop-blur-2xl">
             <div className="flex items-center gap-2 text-emerald-200">
-              <Waypoints className="h-4 w-4" />
-              <span className="text-xs uppercase tracking-[0.28em]">Map-first hero</span>
+              <MapPinned className="h-4 w-4" />
+              <span className="text-xs uppercase tracking-[0.28em]">Shumen geospatial cockpit</span>
             </div>
-            <h3 className="mt-3 max-w-2xl text-3xl font-semibold tracking-[-0.05em] text-white lg:text-4xl">
-              Start the product from the land itself: Sentinel imagery, parcels, and actions around Shumen.
-            </h3>
-            <p className="mt-3 max-w-2xl text-sm leading-7 text-stone-300">
-              This interface now opens with the dominant operating surface. Future agronomy, irrigation,
-              scouting, and execution modules should plug into this map instead of replacing it.
-            </p>
-            <div className="mt-5 grid gap-3 sm:grid-cols-3">
-              {heroSignals.map((signal) => (
-                <div key={signal.label} className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-4">
-                  <p className="text-[11px] uppercase tracking-[0.28em] text-stone-500">{signal.label}</p>
-                  <p className="mt-2 text-sm font-medium text-white">{signal.value}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="grid gap-3 sm:max-w-sm sm:justify-self-end">
-            <div className="rounded-2xl border border-white/10 bg-stone-950/80 px-4 py-4 backdrop-blur">
-              <div className="flex items-center gap-2 text-emerald-200">
-                <MapPinned className="h-4 w-4" />
-                <span className="text-xs uppercase tracking-[0.28em]">Demo region</span>
-              </div>
-              <p className="mt-2 text-lg font-semibold text-white">Shumen, Northeastern Bulgaria</p>
-              <p className="mt-2 text-sm leading-6 text-stone-400">
-                Positioned as the first operational territory for map-first agronomy, water, and execution modules.
-              </p>
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-stone-950/80 px-4 py-4 backdrop-blur">
-              <div className="flex items-center gap-2 text-amber-200">
-                <Sprout className="h-4 w-4" />
-                <span className="text-xs uppercase tracking-[0.28em]">Parcel samples</span>
-              </div>
-              <p className="mt-2 text-sm font-medium text-white">3 example production blocks</p>
-              <p className="mt-2 text-sm leading-6 text-stone-400">
-                Wheat, sunflower, and maize parcels are outlined directly on the map to anchor future workflows.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="pointer-events-none absolute left-5 bottom-5 grid gap-3 sm:max-w-sm">
-          <div className="rounded-2xl border border-white/10 bg-stone-950/80 px-4 py-4 backdrop-blur">
-            <div className="flex items-center gap-2 text-emerald-200">
-              <Satellite className="h-4 w-4" />
-              <span className="text-xs uppercase tracking-[0.28em]">Live design focus</span>
-            </div>
-            <p className="mt-2 text-sm font-medium text-white">Keep the map as the opening move.</p>
-            <p className="mt-2 text-sm leading-6 text-stone-400">
-              Operators should land on territory, parcels, and alerts first, then drill into modules and workflows.
+            <h2 className="mt-2 text-2xl font-semibold text-white">Fullscreen map with hover command surfaces</h2>
+            <p className="mt-2 text-sm leading-6 text-stone-300">
+              Real OSM farmland boundaries are clickable. Switch to NDVI mode to inspect vegetation vigor by parcel.
             </p>
           </div>
         </div>
 
-        <div className="pointer-events-none absolute bottom-5 right-5 grid gap-3 sm:max-w-sm">
-          <div className="rounded-2xl border border-white/10 bg-stone-950/80 px-4 py-4 backdrop-blur">
-            <div className="flex items-center gap-2 text-emerald-200">
-              <Layers3 className="h-4 w-4" />
-              <span className="text-xs uppercase tracking-[0.28em]">Design intent</span>
-            </div>
-            <p className="mt-2 text-sm leading-6 text-stone-400">
-              Keep the map dominant. Let future modules attach contextual panels, automation, and analytics around it.
-            </p>
+        <div className="pointer-events-none absolute bottom-4 right-4 z-[700] rounded-2xl border border-white/20 bg-stone-950/80 px-4 py-3 backdrop-blur">
+          <div className="flex items-center gap-2 text-emerald-200">
+            <Sprout className="h-4 w-4" />
+            <span className="text-xs uppercase tracking-[0.26em]">NDVI mode</span>
           </div>
+          <p className="mt-1 text-xs leading-5 text-stone-300">
+            NDVI layer source: NASA GIBS MODIS Terra 16-day. Parcel shading is tuned for at-a-glance decision support.
+          </p>
         </div>
       </div>
     </section>
