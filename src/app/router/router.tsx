@@ -3,6 +3,7 @@ import App from '@/App.tsx'
 import { AuthGuard } from '@/app/guards/auth-guard.tsx'
 import { AppShellLayout } from '@/app/layouts/app-shell-layout.tsx'
 import { DashboardPage } from '@/pages/app/dashboard-page.tsx'
+import { FieldsWorkspacePage } from '@/pages/app/fields-workspace-page.tsx'
 import { AuthPage } from '@/pages/public/auth-page.tsx'
 import { LandingPage } from '@/pages/public/landing-page.tsx'
 
@@ -29,6 +30,10 @@ export const router = createBrowserRouter([
               {
                 index: true,
                 element: <DashboardPage />,
+              },
+              {
+                path: 'fields',
+                element: <FieldsWorkspacePage />,
               },
             ],
           },

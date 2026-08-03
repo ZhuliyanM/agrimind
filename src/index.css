@@ -1,16 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap');
 @import 'tailwindcss';
 
 :root {
-  --ag-bg-1: #0b1220;
-  --ag-bg-2: #101a2f;
-  --ag-bg-3: #1f2a1d;
-  --ag-glow: rgba(141, 255, 110, 0.16);
-  font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
+  --ag-bg-1: #f7fbff;
+  --ag-bg-2: #eef5ff;
+  --ag-bg-3: #e5f0ff;
+  --ag-accent: rgba(59, 130, 246, 0.2);
+  --ag-text: #0f172a;
+  --ag-muted: #4b5563;
+  font-family: 'Manrope', 'Segoe UI', sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color: #f5f5f4;
-  background: #070c16;
+  color: var(--ag-text);
+  background: #f6faff;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -30,9 +32,9 @@ body,
 body {
   margin: 0;
   background:
-    radial-gradient(1200px 500px at 82% -12%, var(--ag-glow), transparent 54%),
-    radial-gradient(800px 500px at -5% 95%, rgba(94, 234, 212, 0.12), transparent 52%),
-    linear-gradient(155deg, var(--ag-bg-1) 0%, var(--ag-bg-2) 52%, var(--ag-bg-3) 100%);
+    radial-gradient(1200px 540px at 90% -15%, var(--ag-accent), transparent 54%),
+    radial-gradient(900px 520px at -10% 95%, rgba(56, 189, 248, 0.14), transparent 55%),
+    linear-gradient(160deg, var(--ag-bg-1) 0%, var(--ag-bg-2) 52%, var(--ag-bg-3) 100%);
   animation: agAmbient 1.2s ease-out;
 }
 
@@ -56,8 +58,8 @@ pre,
 }
 
 ::selection {
-  background: rgba(52, 211, 153, 0.35);
-  color: white;
+  background: rgba(59, 130, 246, 0.25);
+  color: #0f172a;
 }
 
 #root {
@@ -66,7 +68,7 @@ pre,
 
 @keyframes agAmbient {
   0% {
-    filter: saturate(88%);
+    filter: saturate(92%);
     opacity: 0.92;
   }
   100% {

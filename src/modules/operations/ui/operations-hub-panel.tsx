@@ -42,14 +42,14 @@ const timelineEvents = [
 
 function severityStyle(severity: Incident['severity']) {
   if (severity === 'high') {
-    return 'border-rose-300/40 bg-rose-300/15 text-rose-100'
+    return 'border-rose-200 bg-rose-50 text-rose-700'
   }
 
   if (severity === 'medium') {
-    return 'border-amber-300/40 bg-amber-300/15 text-amber-100'
+    return 'border-amber-200 bg-amber-50 text-amber-700'
   }
 
-  return 'border-sky-300/40 bg-sky-300/15 text-sky-100'
+  return 'border-sky-200 bg-sky-50 text-sky-700'
 }
 
 export function OperationsHubPanel() {
@@ -78,54 +78,54 @@ export function OperationsHubPanel() {
   }
 
   return (
-    <section className="pointer-events-auto flex h-full max-h-[44svh] min-h-[280px] flex-col overflow-hidden rounded-[1rem] border border-white/20 bg-stone-950/84 p-3 backdrop-blur-2xl sm:rounded-[1.2rem] sm:p-3.5 xl:max-h-none xl:min-h-0">
+    <section className="pointer-events-auto flex h-full max-h-[clamp(236px,36svh,520px)] min-h-[228px] flex-col overflow-hidden rounded-[1.2rem] border border-white/55 bg-white/56 p-2.5 shadow-[0_14px_32px_rgba(59,130,246,0.12)] backdrop-blur-xl sm:p-3 xl:max-h-[min(66svh,620px)] xl:min-h-[min(300px,40svh)] [@media(max-height:800px)]:max-h-[min(58svh,500px)] [@media(max-height:800px)]:min-h-[220px] [@media(max-height:800px)]:p-2 [@media(max-height:700px)]:max-h-[min(52svh,420px)] [@media(max-height:700px)]:min-h-[200px] [@media(max-height:700px)]:rounded-[1rem] [@media(max-height:700px)]:p-1.5">
       <div className="flex items-center justify-between gap-3">
         <div>
-          <p className="text-[11px] uppercase tracking-[0.22em] text-emerald-200/75">Оперативен център</p>
-          <h3 className="mt-1 text-sm font-semibold text-white sm:text-base">Диспечер и инциденти</h3>
+          <p className="text-[11px] uppercase tracking-[0.22em] text-blue-700">Оперативен център</p>
+          <h3 className="mt-1 text-sm font-semibold text-slate-900">Диспечер и инциденти</h3>
         </div>
-        <div className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] text-stone-200">
+        <div className="rounded-full border border-white/55 bg-blue-50/44 px-2.5 py-1 text-[11px] text-blue-700">
           {openCount} активни
         </div>
       </div>
 
-      <div className="mt-2.5 grid gap-1.5 sm:grid-cols-3">
-        <button className="inline-flex items-center justify-center gap-1.5 rounded-md border border-white/10 bg-white/[0.04] px-2.5 py-2 text-[11px] uppercase tracking-[0.12em] text-stone-200 transition hover:border-white/30 hover:text-white">
+      <div className="mt-2 grid gap-1 sm:grid-cols-3 [@media(max-height:800px)]:hidden">
+        <button className="inline-flex items-center justify-center gap-1.5 rounded-[0.95rem] border border-white/55 bg-blue-50/34 px-2 py-1.5 text-[10px] uppercase tracking-[0.12em] text-blue-700 transition duration-300 hover:border-blue-200 hover:bg-white/60">
           <Plus className="h-3.5 w-3.5" /> Нова мисия
         </button>
-        <button className="inline-flex items-center justify-center gap-1.5 rounded-md border border-white/10 bg-white/[0.04] px-2.5 py-2 text-[11px] uppercase tracking-[0.12em] text-stone-200 transition hover:border-white/30 hover:text-white">
+        <button className="inline-flex items-center justify-center gap-1.5 rounded-[0.95rem] border border-white/55 bg-blue-50/34 px-2 py-1.5 text-[10px] uppercase tracking-[0.12em] text-blue-700 transition duration-300 hover:border-blue-200 hover:bg-white/60">
           <Droplets className="h-3.5 w-3.5" /> Проверка на поливане
         </button>
-        <button className="inline-flex items-center justify-center gap-1.5 rounded-md border border-white/10 bg-white/[0.04] px-2.5 py-2 text-[11px] uppercase tracking-[0.12em] text-stone-200 transition hover:border-white/30 hover:text-white">
+        <button className="inline-flex items-center justify-center gap-1.5 rounded-[0.95rem] border border-white/55 bg-blue-50/34 px-2 py-1.5 text-[10px] uppercase tracking-[0.12em] text-blue-700 transition duration-300 hover:border-blue-200 hover:bg-white/60">
           <Tractor className="h-3.5 w-3.5" /> План за техника
         </button>
       </div>
 
-      <div className="mt-2.5 grid min-h-0 flex-1 gap-2.5 xl:grid-cols-1">
-        <article className="flex min-h-0 flex-col rounded-md border border-white/10 bg-white/[0.03] p-3">
-          <div className="mb-3 flex items-center gap-2 text-stone-300">
-            <AlertTriangle className="h-4 w-4 text-amber-200" />
+      <div className="mt-2 grid min-h-0 flex-1 gap-1.5 xl:grid-cols-1 [@media(max-height:800px)]:mt-1.5 [@media(max-height:700px)]:mt-1">
+        <article className="flex min-h-0 flex-col rounded-[1rem] border border-white/55 bg-blue-50/28 p-2 [@media(max-height:800px)]:p-1.5">
+          <div className="mb-3 flex items-center gap-2 text-slate-600">
+            <AlertTriangle className="h-4 w-4 text-amber-500" />
             <p className="text-xs uppercase tracking-[0.2em]">Опашка инциденти</p>
           </div>
-          <div className="grid max-h-[22svh] gap-1.5 overflow-auto pr-1 sm:max-h-[24svh] xl:max-h-[28svh]">
+          <div className="grid max-h-[min(17svh,200px)] gap-1 overflow-auto pr-1 sm:max-h-[min(19svh,220px)] xl:max-h-[min(26svh,240px)] [@media(max-height:800px)]:max-h-[min(16svh,170px)] [@media(max-height:700px)]:max-h-[min(14svh,128px)]">
             {incidents.map((incident) => (
-              <div key={incident.id} className="rounded-md border border-white/10 bg-stone-950/70 px-2.5 py-2.5">
+              <div key={incident.id} className="rounded-[0.9rem] border border-white/55 bg-white/46 px-2.5 py-2">
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <p className="text-xs font-semibold text-white sm:text-sm">{incident.title}</p>
-                    <p className="mt-1 text-xs text-stone-400">{incident.parcel}</p>
+                    <p className="text-xs font-semibold text-slate-900 sm:text-sm">{incident.title}</p>
+                    <p className="mt-1 text-xs text-slate-500">{incident.parcel}</p>
                   </div>
                   <span className={["rounded-full border px-2 py-1 text-[10px] uppercase tracking-[0.2em]", severityStyle(incident.severity)].join(' ')}>
                     {severityLabel[incident.severity]}
                   </span>
                 </div>
                 <div className="mt-3 flex items-center justify-between gap-2">
-                  <span className="text-xs text-stone-400">Статус: {statusLabel[incident.status]}</span>
+                  <span className="text-xs text-slate-500">Статус: {statusLabel[incident.status]}</span>
                   <button
                     type="button"
                     onClick={() => markResolved(incident.id)}
                     disabled={incident.status === 'resolved'}
-                    className="inline-flex items-center gap-1 rounded-md border border-emerald-300/35 bg-emerald-300/15 px-2 py-1 text-xs text-emerald-100 transition disabled:cursor-not-allowed disabled:opacity-50"
+                    className="inline-flex items-center gap-1 rounded-[0.8rem] border border-white/60 bg-blue-50/42 px-2 py-1 text-xs text-blue-700 transition duration-300 hover:bg-white/62 disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     <CheckCircle2 className="h-3.5 w-3.5" /> Затвори
                   </button>
@@ -135,22 +135,22 @@ export function OperationsHubPanel() {
           </div>
         </article>
 
-        <article className="rounded-md border border-white/10 bg-white/[0.03] p-3">
-          <div className="mb-3 flex items-center gap-2 text-stone-300">
-            <ListChecks className="h-4 w-4 text-emerald-200" />
+        <article className="rounded-[1rem] border border-white/55 bg-blue-50/28 p-2 [@media(max-height:800px)]:p-1.5">
+          <div className="mb-3 flex items-center gap-2 text-slate-600">
+            <ListChecks className="h-4 w-4 text-blue-600" />
             <p className="text-xs uppercase tracking-[0.2em]">Хронология на изпълнение</p>
           </div>
-          <div className="grid max-h-[22svh] gap-1.5 overflow-auto pr-1 sm:max-h-[24svh] xl:max-h-[26svh]">
+          <div className="grid max-h-[min(17svh,200px)] gap-1 overflow-auto pr-1 sm:max-h-[min(19svh,220px)] xl:max-h-[min(24svh,220px)] [@media(max-height:800px)]:max-h-[min(15svh,160px)] [@media(max-height:700px)]:max-h-[min(13svh,116px)]">
             {timelineEvents.map((event) => (
-              <div key={event.at + event.event} className="rounded-md border border-white/10 bg-stone-950/70 px-2.5 py-2">
+              <div key={event.at + event.event} className="rounded-[0.9rem] border border-white/55 bg-white/46 px-2.5 py-2">
                 <div className="flex items-center justify-between gap-2">
-                  <p className="text-xs text-stone-500">{event.at}</p>
+                  <p className="text-xs text-slate-500">{event.at}</p>
                   <Clock3 className={[
                     'h-3.5 w-3.5',
-                    event.tone === 'ok' ? 'text-emerald-200' : 'text-amber-200',
+                    event.tone === 'ok' ? 'text-blue-600' : 'text-amber-500',
                   ].join(' ')} />
                 </div>
-                <p className="mt-1 text-xs text-stone-200 sm:text-sm">{event.event}</p>
+                <p className="mt-1 text-xs text-slate-700 sm:text-sm">{event.event}</p>
               </div>
             ))}
           </div>

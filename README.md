@@ -1,16 +1,28 @@
-# React + Vite
+# AgriMind
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+AgriMind is a Vite + React frontend with a lightweight Python backend layer for agronomy-oriented overview data.
 
-Currently, two official plugins are available:
+## Frontend
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- `npm run dev`
+- `npm run typecheck`
+- `npm run build`
 
-## React Compiler
+## Python Backend
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. `npm run api:install`
+2. `npm run api:dev`
 
-## Expanding the Oxlint configuration
+The Python API runs on `http://127.0.0.1:8000` by default and exposes:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+- `GET /health`
+- `GET /api/overview`
+- `POST /api/chat`
+
+## Environment
+
+Copy `.env.example` into your local env file and configure:
+
+- `VITE_SUPABASE_URL`
+- `VITE_SUPABASE_ANON_KEY`
+- `VITE_API_BASE_URL`
